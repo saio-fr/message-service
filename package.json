@@ -1,0 +1,34 @@
+{
+  "name": "@saio/message-service",
+  "version": "0.1.0",
+  "description": "Message forwarding (between operators & visitors) & saving service",
+  "main": "src/main.js",
+  "dependencies": {
+    "@saio/service-runner": "*",
+    "@saio/db-component": "*",
+    "@saio/wsocket-component": "*",
+    "underscore": "*",
+    "when": "*"
+  },
+  "devDependencies": {
+    "eslint": "~1.3",
+    "jscs": "*",
+    "blue-tape": "*",
+    "tap-spec": "*"
+  },
+  "scripts": {
+    "start": "service-runner src/main.js",
+    "test": "eslint . && jscs . && blue-tape test/*.test.js | tap-spec",
+    "test.integration": "bash tasks/test.integration.sh",
+    "test.integration.clean": "bash tasks/test.integration.clean.sh",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:saio-fr/message-service.git"
+  },
+  "author": "Alexis Terrat",
+  "bugs": {
+    "url": "https://github.com/saio-fr/message-service/issues"
+  },
+  "homepage": "https://github.com/saio-fr/message-service"
+}
