@@ -50,13 +50,15 @@ function complete(config) {
 function overwrite(config, options) {
   _.each(options, function(value, key) {
     var splittedKey = key.split('-');
-    if (splittedKey.length !== 2 ||
-        !_.has(config, splittedKey[0]) ||
-        !_.has(config[splittedKey[0]], splittedKey[1])) {
-      throw new Error('invalid option: ' + key);
-    }
-
-    config[splittedKey[0]][splittedKey[1]] = value;
+    var l = splittedKey.length;
+    _.reduce(splittedKey, function(lastLevelConfig, subKey, i) {
+      if (i === l - 1) {
+        lastLevelConfig[subKey] = value;
+      } else if (!_.has(lastLevelConfig, subKey)) {
+        lastLevelConfig[subKey] = {};
+      }
+      return lastLevelConfig[subKey];
+    }, config);
   });
 }
 

@@ -76,34 +76,6 @@ tape('config.js', function(t) {
     st.end();
   });
 
-  t.test('throws if option doesn\'t start by ws or db', function(st) {
-    var options = { 'undefined-host': 'localhost' };
-    var expected = /invalid option: undefined-host/;
-    Config.__set__('path', stubPath('../test/helpers/configComplete.json'));
-
-    function run() {
-      Config.build(options);
-    }
-
-    st.plan(1);
-    st.throws(run, expected);
-    st.end();
-  });
-
-  t.test('option starting by db but with unknown sub field', function(st) {
-    var options = { 'db-undefined': 'localhost' };
-    var expected = /invalid option: db-undefined/;
-    Config.__set__('path', stubPath('../test/helpers/configComplete.json'));
-
-    function run() {
-      Config.build(options);
-    }
-
-    st.plan(1);
-    st.throws(run, expected);
-    st.end();
-  });
-
   t.test('valid config with missing field but completed by option', function(st) {
     var options = { 'db-host': 'localhost' };
     var expected = require('./helpers/configComplete.json');
