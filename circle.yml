@@ -1,0 +1,31 @@
+# Initialize docker cmd
+machine:
+  services:
+    - docker
+# Build image from .dockerfile
+dependencies:
+  cache_directories:
+    - ~/kubernetes
+    - ~/docker
+  override:
+    - echo $NPM_TOKEN > ~/.npmrc
+    - npm install
+    - if [[ -e ~/docker/image.tar ]]; then docker load --input ~/docker/image.tar; fi
+    - docker build -t ${EXTERNAL_REGISTRY_ENDPOINT}/message:${CIRCLE_BRANCH}.${CIRCLE_SHA1} .
+    - mkdir -p ~/docker; docker save ${EXTERNAL_REGISTRY_ENDPOINT}/message:${CIRCLE_BRANCH}.${CIRCLE_SHA1} > ~/docker/image.tar
+
+test:
+  override:
+    - npm test
+    - npm run test.integration
+    # - docker run -i -t ${EXTERNAL_REGISTRY_ENDPOINT}/message:${CIRCLE_BRANCH}.${CIRCLE_SHA1}
+
+deployment:
+  kubernetes:
+    branch: [master, develop]
+    commands:
+      - chmod +x tasks/deploy/auth-gcloud.sh && tasks/deploy/auth-gcloud.sh
+      - gcloud docker -- tag -f ${EXTERNAL_REGISTRY_ENDPOINT}/message:${CIRCLE_BRANCH}.${CIRCLE_SHA1} ${EXTERNAL_REGISTRY_ENDPOINT}/message:${CIRCLE_BRANCH}
+      - gcloud docker -- push ${EXTERNAL_REGISTRY_ENDPOINT}/message:${CIRCLE_BRANCH}.${CIRCLE_SHA1} > /dev/null
+      - gcloud docker -- push ${EXTERNAL_REGISTRY_ENDPOINT}/message:${CIRCLE_BRANCH} > /dev/null
+      - chmod +x tasks/deploy/deploy-to-kubernetes.sh && tasks/deploy/deploy-to-kubernetes.sh
