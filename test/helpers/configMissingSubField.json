@@ -10,7 +10,6 @@
     "dialect": "mysql",
     "user": "root",
     "password": "",
-    "host": "localhost",
     "port": "3306",
     "dbname": "message"
   }

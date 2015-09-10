@@ -8,19 +8,21 @@
     "@saio/db-component": "*",
     "@saio/wsocket-component": "*",
     "underscore": "*",
-    "when": "*"
+    "when": "*",
+    "moment": "*"
   },
   "devDependencies": {
     "eslint": "~1.3",
     "jscs": "*",
     "blue-tape": "*",
-    "tap-spec": "*"
+    "rewire": "*"
   },
   "scripts": {
     "start": "service-runner src/main.js",
-    "test": "eslint . && jscs . && blue-tape test/*.test.js | tap-spec",
+    "pretest": "eslint . && jscs .",
+    "test": "blue-tape test/*.test.js",
     "test.integration": "bash tasks/test.integration.sh",
-    "test.integration.clean": "bash tasks/test.integration.clean.sh",
+    "test.integration.clean": "bash tasks/test.integration.clean.sh"
   },
   "repository": {
     "type": "git",

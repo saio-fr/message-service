@@ -17,29 +17,12 @@
  |                                                 |
 \*-------------------------------------------------*/
 
-module.exports = function(sequelize, Datatypes) {
-  var model = {
-    license: {
-      type: Datatypes.STRING,
-      allowNull: false
-    },
-    thread: { // == visitorAuthId
-      type: Datatypes.STRING,
-      allowNull: false
-    },
-    sender: {// == visitor/operatorAuthId
-      type: Datatypes.STRING,
-      allowNull: false
-    },
-    date: { // when the msg was received by message-service, in ms from unix epoch
-      type: Datatypes.BIGINT, // DATE type not used because of UTC/LOCAL issues
-      allowNull: false
-    },
-    message: {
-      type: Datatypes.TEXT,
-      allowNull: false
+function stub(wantedPath) {
+  return {
+    resolve: function() {
+      return wantedPath;
     }
   };
+}
 
-  return sequelize.define('Message', model);
-};
+module.exports.stub = stub;

@@ -1,0 +1,25 @@
+[{
+  "sender": "visitor",
+  "message": "hello world !"
+}, {
+  "sender": "operator1",
+  "message": "hello !"
+}, {
+  "sender": "operator2",
+  "message": "hi !"
+}, {
+  "sender": "operator1",
+  "message": "what is your problem ?"
+}, {
+  "sender": "visitor",
+  "message": "nothing."
+}, {
+  "sender": "operator1",
+  "message": "ok so get lost please, goodbye."
+}, {
+  "sender": "visitor",
+  "message": "ok np, goodbye !"
+}, {
+  "sender": "operator2",
+  "message": "we are always happy to keep our customers satisfied ! goodbye !"
+}]

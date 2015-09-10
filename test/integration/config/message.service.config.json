@@ -1,0 +1,17 @@
+{
+  "ws": {
+    "url": "ws://crossbar:8080",
+    "realm": "saio",
+    "authId": "service",
+    "password": "password"
+  },
+
+  "db": {
+    "dialect": "postgres",
+    "user": "postgres",
+    "password": "test",
+    "host": "db",
+    "port": "5432",
+    "dbname": "postgres"
+  }
+}

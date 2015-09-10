@@ -1,0 +1,10 @@
+FROM message-base
+
+WORKDIR /opt/service
+ADD model ./model
+ADD test/integration/helpers ./helpers
+ADD test/integration/message.test.integration.js ./test.js
+ADD test/integration/config/test.package.json ./package.json
+
+RUN npm install
+ENTRYPOINT ["npm","test"]

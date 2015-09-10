@@ -24,11 +24,7 @@ var _ = require('underscore');
 function complete(config) {
   config = _.defaults(config, {
     ws: {},
-    db: {},
-    visitorSend: undefined,
-    visitorReceive: undefined,
-    operatorSend: undefined,
-    operatorReceive: undefined
+    db: {}
   });
 
   config.ws = _.defaults(config.ws, {
@@ -46,26 +42,21 @@ function complete(config) {
     port: undefined,
     dbname: undefined
   });
+
+  config.db.model = './model/message.js';
 }
 
 // overwrite static config by runtime options
 function overwrite(config, options) {
   _.each(options, function(value, key) {
     var splittedKey = key.split('-');
-    switch (splittedKey.length) {
-      case 1:
-        config[splittedKey[0]] = value;
-        break;
-      case 2:
-        try {
-          config[splittedKey[0]][splittedKey[1]] = value;
-        } catch (err) {
-          throw new Error('invalid option: ' + key);
-        }
-        break;
-      default:
-        throw new Error('invalid option: ' + key);
+    if (splittedKey.length !== 2 ||
+        !_.has(config, splittedKey[0]) ||
+        !_.has(config[splittedKey[0]], splittedKey[1])) {
+      throw new Error('invalid option: ' + key);
     }
+
+    config[splittedKey[0]][splittedKey[1]] = value;
   });
 }
 
@@ -85,7 +76,7 @@ function build(runOptions) {
   try {
     config = require(path.resolve(process.env.PWD, 'config/config.json'));
   } catch (err) {
-    throw new Error('config file not found !');
+    throw new Error('config file not found');
   }
 
   complete(config);

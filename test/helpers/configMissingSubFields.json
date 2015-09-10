@@ -1,0 +1,13 @@
+{
+  "ws": {
+    "url": "ws://default:8080",
+    "realm": "saio"
+  },
+
+  "db": {
+    "dialect": "mysql",
+    "host": "default",
+    "port": "3306",
+    "dbname": "message"
+  }
+}

@@ -1,0 +1,10 @@
+FROM message-base
+
+WORKDIR /opt/service
+ADD model ./model
+ADD src ./src
+RUN mkdir config
+ADD test/integration/config/message.service.config.json ./config/config.json
+
+RUN npm install
+ENTRYPOINT ["npm","start"]

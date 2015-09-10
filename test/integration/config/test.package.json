@@ -1,0 +1,25 @@
+{
+  "name": "@saio/message-service-integration-test",
+  "version": "0.1.0",
+  "description": "Message-service integration test",
+  "dependencies": {
+    "underscore": "*",
+    "when": "*",
+    "blue-tape": "*",
+    "@saio/service-runner": "*",
+    "@saio/db-component": "*",
+    "@saio/wsocket-component": "*"
+  },
+  "scripts": {
+    "test": "blue-tape ./test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:saio-fr/message-service.git"
+  },
+  "author": "Alexis Terrat",
+  "bugs": {
+    "url": "https://github.com/saio-fr/message-service/issues"
+  },
+  "homepage": "https://github.com/saio-fr/message-service"
+}
